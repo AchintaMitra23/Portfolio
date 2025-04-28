@@ -4,26 +4,32 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./DarkMode.css";
 import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { setTheme } from "../../state/slices/themeSlice";
 
-const DarkMode = (props: { theme: string; setTheme: any }) => {
+const DarkMode = () => {
+  const theme = useSelector((state: RootState) => state.theme.value);
+  const dispatch = useDispatch();
+
   const setDarkMode = () => {
     document.querySelector("body")?.setAttribute("data-theme", "dark");
-    props.setTheme("dark");
+    dispatch(setTheme("dark"));
   };
 
   const setLightMode = () => {
     document.querySelector("body")?.setAttribute("data-theme", "light");
-    props.setTheme("light");
+    dispatch(setTheme("light"));
   };
 
   const toggle = () => {
-    if (props.theme === "dark") setLightMode();
+    if (theme === "dark") setLightMode();
     else setDarkMode();
   };
 
   return (
     <div className="dark_mode">
-      {props.theme === "dark" ? (
+      {theme === "dark" ? (
         <FontAwesomeIcon icon={faToggleOff} onClick={toggle} size="lg" />
       ) : (
         <FontAwesomeIcon icon={faToggleOn} onClick={toggle} size="lg" />

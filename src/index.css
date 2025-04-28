@@ -28,4 +28,5 @@ body {
   background-repeat: no-repeat;
   height: 100%;
   font-family: 'Poppins';
+  color: var(--body_color);
 }
